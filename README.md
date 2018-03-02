@@ -1,1 +1,1 @@
-Dies ist ein Kassensystem, basierend auf Material Design mit dem Framework Materialize. 
+Dies wird ein Kassensystem, basierend auf Material Design mit dem Framework Materialize. 
