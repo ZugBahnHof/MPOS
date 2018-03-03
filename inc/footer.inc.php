@@ -28,6 +28,16 @@
       </div>
     </footer>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        Materialize.toast('$modal_text', 4000);
+        $('select').material_select();
+        $(".button-collapse").sideNav();
+        $('.materialboxed').materialbox();
+        $('.tooltipped').tooltip({delay: 50});
+      });
+      var instance = M.Tabs.init(el, options);
+   </script>
   </body>
 </html>
 HEREDOC;
