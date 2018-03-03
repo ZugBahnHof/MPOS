@@ -52,9 +52,6 @@ if(isset($error_msg) && !empty($error_msg)) {
 }
 ?>
 	<div class="row">
-		<div class="chip">
-			Noch kein Mitglied? <a href="register.php">Jetzt Registrieren!</a>
-		</div>
 	</div>
 
 	<div class="row">
@@ -68,13 +65,18 @@ if(isset($error_msg) && !empty($error_msg)) {
 			<label for="inputPassword">Passwort</label>
 		</div>
 
-		<input type="checkbox" value="remember-me" id="remember-me" name="angemeldet_bleiben" value="1" checked="checked">
-		<label for="remember-me">Angemeldet bleiben</label>
-	</div>
+		<label>
+        <input type="checkbox" value="remember-me" id="remember-me" name="angemeldet_bleiben" value="1" checked="checked" />
+        <span>Angemeldet bleiben</span>
+    </label>
 
-	<button class="<?php echo $site_color_accent; ?> btn waves-effect waves-light" type="submit" name="action">Login
-		<i class="material-icons right">send</i>
-	</button>
+		<br>
+
+		<button class="<?php echo $site_color_accent; ?> btn waves-effect waves-light col s12 m6 l3" type="submit" name="action">Login
+			<i class="material-icons right">send</i>
+		</button>
+
+	</div>
   </form>
 	</div>
 
