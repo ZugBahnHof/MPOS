@@ -39,6 +39,7 @@ $email_value = "";
 if(isset($_POST['email']))
 	$email_value = htmlentities($_POST['email']);
 
+$site_title = "Login - ";
 include("inc/header.inc.php");
 ?>
 	<div class="row">

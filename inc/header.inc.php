@@ -1,7 +1,6 @@
 <?php
 session_start();
 //require_once("inc/config.inc.php");
-$site_title = "Index - ";
 $site_color = "amber";
 $site_color_accent = "red accent-4";
 $site_color_text = "amber-text";

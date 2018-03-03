@@ -3,6 +3,7 @@ session_start();
 require_once("inc/config.inc.php");
 require_once("inc/functions.inc.php");
 
+$site_title = "Registrierung - ";
 include("inc/header.inc.php")
 ?>
 <h1 class="<?php echo $site_color_accent_text; ?>">Registrierung</h1>
