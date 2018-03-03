@@ -5,7 +5,7 @@ require_once("inc/functions.inc.php");
 
 include("inc/header.inc.php")
 ?>
-<h4>Registrierung</h4>
+<h1 class="<?php echo $site_color_accent_text; ?>">Registrierung</h1>
 <?php
 $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
 

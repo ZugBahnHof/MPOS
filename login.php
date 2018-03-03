@@ -43,7 +43,7 @@ include("inc/header.inc.php");
 ?>
 	<div class="row">
   <form action="login.php" method="post" class="col s12">
-	<h4>Login</h4>
+	<h1 class="<?php echo $site_color_accent_text; ?>">Login</h1>
 
 <?php
 if(isset($error_msg) && !empty($error_msg)) {
@@ -53,9 +53,6 @@ if(isset($error_msg) && !empty($error_msg)) {
 	<div class="row">
 		<div class="chip">
 			Noch kein Mitglied? <a href="register.php">Jetzt Registrieren!</a>
-		</div>
-		<div class="chip">
-			Passwort vergessen?<a href="passwortvergessen.php">Jetzt neues anfordern!</a>
 		</div>
 	</div>
 

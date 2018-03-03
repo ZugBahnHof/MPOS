@@ -71,7 +71,7 @@ $user = check_user();
 ?>
 
 
-<h1>Einstellungen</h1>
+<h1 class="<?php echo $site_color_accent_text; ?>">Einstellungen</h1>
 
 <?php
 if(isset($success_msg) && !empty($success_msg)):
