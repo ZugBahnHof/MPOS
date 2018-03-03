@@ -1,4 +1,12 @@
 <?php
+
+if (strlen($modaltext) > 1) {
+  $toast = "M.toast({html: '$modal_text'})";
+} else {
+  $toast = "";
+}
+
+
   echo <<<HEREDOC
   </main>
   <!--Footer section-->
@@ -12,7 +20,7 @@
           <div class="col l4 offset-l2 s12">
             <h5 class="white-text">Links</h5>
             <ul>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://www.php-einfach.de/experte/php-codebeispiele/loginscript/">Loginsystem von Nils Reimers</a></li>
               <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
               <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
               <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
@@ -28,15 +36,19 @@
       </div>
     </footer>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script>
+    <script type="text/javascript">
       $(document).ready(function() {
-        Materialize.toast('$modal_text', 4000);
         $('select').material_select();
         $(".button-collapse").sideNav();
         $('.materialboxed').materialbox();
         $('.tooltipped').tooltip({delay: 50});
       });
       var instance = M.Tabs.init(el, options);
+    </script>
+    <script type="text/javascript">
+
+      var elem = document.querySelector('.tooltipped');
+      var instance = M.Tooltip.init(elem);
    </script>
   </body>
 </html>
