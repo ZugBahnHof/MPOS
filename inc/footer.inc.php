@@ -21,8 +21,8 @@ if (strlen($modaltext) > 1) {
             <h5 class="white-text">Links</h5>
             <ul>
               <li><a class="grey-text text-lighten-3" href="https://www.php-einfach.de/experte/php-codebeispiele/loginscript/">Loginsystem von Nils Reimers</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://next.materializecss.com">Framework Materialize</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/ZugBahnHof/MPOS">Diese Projekt auf GitHub</a></li>
               <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
             </ul>
           </div>
