@@ -48,7 +48,9 @@ if (strlen($modaltext) > 1) {
     <script type="text/javascript">
 
       var elem = document.querySelector('.tooltipped');
+      var elem2 = document.querySelector('.tooltipped');
       var instance = M.Tooltip.init(elem);
+      var instance = M.Tooltip.init(elem2);
    </script>
   </body>
 </html>

@@ -54,7 +54,7 @@ echo <<<HEREDOC
       <div class="container">
         <a href="index.php" class="brand-logo">MPOS</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-           <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Verkaufen" href=""><i class="material-icons">shopping_cart</i></a></li>
+           <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Verkaufen" href="shop_form.php"><i class="material-icons">shopping_cart</i></a></li>
   			   <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Artikel" href=""><i class="material-icons">widgets</i></a></li>
      			 <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Kontostand" href=""><i class="material-icons">attach_money</i></a></li>
            $preferences_text_a
