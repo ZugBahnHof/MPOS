@@ -3,7 +3,7 @@ session_start();
 require_once( "inc/config.inc.php" );
 require_once( "inc/functions.inc.php" );
 
-$site_title = "Registrierung - ";
+$site_title = "Registrierung";
 include( "inc/header.inc.php" )
 
 ?>
@@ -54,14 +54,15 @@ if ( isset( $_GET['register'] ) ) {
 		$passwort_hash = password_hash( $passwort, PASSWORD_DEFAULT );
 
 		$statement = $pdo->prepare( "INSERT INTO users (email, passwort, vorname, nachname) VALUES (:email, :passwort, :vorname, :nachname)" );
-		$result    = $statement->execute( array( 'email'    => $email,
-		                                         'passwort' => $passwort_hash,
-		                                         'vorname'  => $vorname,
-		                                         'nachname' => $nachname
+		$result    = $statement->execute( array(
+			'email'    => $email,
+			'passwort' => $passwort_hash,
+			'vorname'  => $vorname,
+			'nachname' => $nachname
 		) );
 
 		if ( $result ) {
-			echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
+			echo '<p>Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a></p>';
 			$showFormular = false;
 		} else {
 			echo 'Beim Abspeichern ist leider ein Fehler aufgetreten<br>';

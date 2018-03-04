@@ -1,8 +1,8 @@
 <?php
-$site_title = "Index - ";
+$site_title = "Startseite";
 include 'inc/header.inc.php';
 ?>
-<h1 class="<?php echo $site_color_accent_text; ?>">Herzlich Willkommen bei MPOS!</h1>
+<h1 class="<?= $site_color_accent_text ?>">Herzlich Willkommen bei MPOS!</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
     aliqua.
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 require_once( "inc/config.inc.php" );
 require_once( "inc/functions.inc.php" );
 
@@ -22,15 +22,16 @@ if ( isset( $_POST['email'] ) && isset( $_POST['passwort'] ) ) {
 			$securitytoken = random_string();
 
 			$insert = $pdo->prepare( "INSERT INTO securitytokens (user_id, identifier, securitytoken) VALUES (:user_id, :identifier, :securitytoken)" );
-			$insert->execute( array( 'user_id'       => $user['id'],
-			                         'identifier'    => $identifier,
-			                         'securitytoken' => sha1( $securitytoken )
+			$insert->execute( array(
+				'user_id'       => $user['id'],
+				'identifier'    => $identifier,
+				'securitytoken' => sha1( $securitytoken )
 			) );
 			setcookie( "identifier", $identifier, time() + ( 3600 * 24 * 365 ) ); //Valid for 1 year
 			setcookie( "securitytoken", $securitytoken, time() + ( 3600 * 24 * 365 ) ); //Valid for 1 year
 		}
 
-		header( "location: index.php?msg=Der+Login+war+erfolgreich" );
+		header( "Location: index.php?msg=Der+Login+war+erfolgreich" );
 		exit;
 	} else {
 		$error_msg = "E-Mail oder Passwort war ungültig";
@@ -43,7 +44,7 @@ if ( isset( $_POST['email'] ) ) {
 	$email_value = htmlentities( $_POST['email'] );
 }
 
-$site_title = "Login - ";
+$site_title = "Login";
 include( "inc/header.inc.php" );
 ?>
 <div class="row">
@@ -70,13 +71,14 @@ include( "inc/header.inc.php" );
                 <label for="inputPassword">Passwort</label>
             </div>
 
-            <label>
-                <input type="checkbox" value="remember-me" id="remember-me" name="angemeldet_bleiben" value="1"
-                       checked="checked"/>
-                <span>Angemeldet bleiben</span>
-            </label>
+            <p>
+                <label>
+                    <input type="checkbox" value="remember-me" id="remember-me" name="angemeldet_bleiben" value="1"
+                           checked="checked"/>
+                    <span>Angemeldet bleiben?</span>
+                </label>
+            </p>
 
-            <br>
 
             <button class="<?php echo $site_color_accent; ?> btn waves-effect waves-light col s12 m6 l3" type="submit"
                     name="action">Login

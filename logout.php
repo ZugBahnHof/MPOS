@@ -10,5 +10,5 @@ setcookie( "securitytoken", "", time() - ( 3600 * 24 * 365 ) );
 require_once( "inc/config.inc.php" );
 require_once( "inc/functions.inc.php" );
 
-header( "Location:index.php" )
-?>
+header( "Location: index.php?msg=Der+Logout+war+erfolgreich" );
+
