@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
   include 'inc/header.inc.php';
   echo '
   <table class="striped">
@@ -21,3 +22,7 @@
   ';
   echo "Zu zahlen:";
  ?>
+=======
+var_dump( $_POST );
+?>
+>>>>>>> 8ff7bed6f3f5d4985a40279a3b4b7c9c09d4a72f
