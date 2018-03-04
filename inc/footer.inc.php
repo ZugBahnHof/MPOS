@@ -1,13 +1,13 @@
 <?php
 
-if (strlen($modaltext) > 1) {
-  $toast = "M.toast({html: '$modal_text'})";
+if ( strlen( $modaltext ) > 1 ) {
+	$toast = "M.toast({html: '$modal_text'})";
 } else {
-  $toast = "";
+	$toast = "";
 }
 
 
-  echo <<<HEREDOC
+echo <<<HEREDOC
   </main>
   <!--Footer section-->
   <footer class="page-footer $site_color_accent">
@@ -55,4 +55,4 @@ if (strlen($modaltext) > 1) {
   </body>
 </html>
 HEREDOC;
- ?>
+?>

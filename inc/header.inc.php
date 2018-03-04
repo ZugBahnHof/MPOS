@@ -1,20 +1,22 @@
 <?php
 session_start();
-require_once("inc/config.inc.php");
-require_once("inc/functions.inc.php");
-$site_color = "amber";
-$site_color_accent = "red accent-4";
-$site_color_text = "amber-text";
+require_once( "inc/config.inc.php" );
+require_once( "inc/functions.inc.php" );
+$site_color             = "amber";
+$site_color_accent      = "red accent-4";
+$site_color_text        = "amber-text";
 $site_color_accent_text = "red-text text-accent-4";
-$modal_text = $_GET['msg'];
+$modal_text             = $_GET['msg'];
 
-if (is_checked_in() == TRUE) {$logged_in = TRUE;}
-switch ($logged_in) {
-	case TRUE:
-		$logging_link = "logout.php";
-		$logging_imag = "clear";
-		$logging_text = "Logout";
-		$image_lock = "lock_open";
+if ( is_checked_in() == true ) {
+	$logged_in = true;
+}
+switch ( $logged_in ) {
+	case true:
+		$logging_link       = "logout.php";
+		$logging_imag       = "clear";
+		$logging_text       = "Logout";
+		$image_lock         = "lock_open";
 		$preferences_text_a = '<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Einstellungen" href="settings.php"><i class="material-icons">settings</i></a></li>';
 		$preferences_text_b = '<li><a href="settings.php"><i class="material-icons">settings</i>Einstellungen</a></li>';
 		break;
@@ -23,7 +25,7 @@ switch ($logged_in) {
 		$logging_link = "login.php";
 		$logging_imag = "check";
 		$logging_text = "Login";
-		$image_lock = "lock";
+		$image_lock   = "lock";
 		break;
 }
 
