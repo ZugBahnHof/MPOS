@@ -1,6 +1,7 @@
 <?php
   $site_title = "Verkauf - ";
   include 'inc/header.inc.php';
+  $user = check_user();
  ?>
 
  <script type="text/javascript">
