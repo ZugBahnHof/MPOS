@@ -51,6 +51,11 @@ if ( $modal ) {
 <head>
     <meta charset="utf-8">
     <title><?= $site_title ?> – MPOS</title>
+
+		<!--Favicons-->
+		<link rel="shortcut icon" href="icons/favicon.ico">
+		<link rel="icon" type="image/png" href="icons/favicon.png" sizes="48x48">
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -123,4 +128,3 @@ if ( $modal ) {
 <!--main section-->
 <main>
     <div class="container">
-
