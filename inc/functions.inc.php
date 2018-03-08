@@ -6,12 +6,13 @@
  * @license: GNU GPLv3
  */
 include_once( "password.inc.php" );
+require_once( "config.inc.php" );
 
 /**
  * Checks that the user is logged in.
  * @return Returns the row of the logged in user
  */
-function check_user() {
+function check_user_basic() {
 	global $pdo;
 
 	if ( ! isset( $_SESSION['userid'] ) && isset( $_COOKIE['identifier'] ) && isset( $_COOKIE['securitytoken'] ) ) {
@@ -41,7 +42,7 @@ function check_user() {
 
 
 	if ( ! isset( $_SESSION['userid'] ) ) {
-		die( header( "Location: index.php?msg=Bitte+erst+anmelden!" ) );
+		return false;
 	}
 
 
@@ -50,6 +51,14 @@ function check_user() {
 	$user      = $statement->fetch();
 
 	return $user;
+}
+
+function check_user() {
+	if ( check_user_basic() != false ) {
+		return check_user_basic();
+	} else {
+		die( header( "Location: index.php?msg=Bitte+erst+anmelden!" ) );
+	}
 }
 
 /**
