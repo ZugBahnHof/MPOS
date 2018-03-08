@@ -1,13 +1,3 @@
-<?php
-
-if ( $modal ) {
-	$toast = "M.toast({html: '$modal_text'})";
-} else {
-	$toast = "";
-}
-
-
-?>
 </main>
 <!--Footer section-->
 <footer class="page-footer <?= $site_color_accent ?>">
@@ -42,20 +32,6 @@ if ( $modal ) {
         </div>
     </div>
 </footer>
-
-<!-- Import JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".button-collapse").sidenav();
-        $('.materialboxed').materialbox();
-        $('.tooltipped').tooltip();
-		<?= $toast?>
-    });
-
-</script>
 </body>
 </html>
 

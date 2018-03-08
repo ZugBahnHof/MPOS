@@ -36,6 +36,13 @@ switch ( $logged_in ) {
 		break;
 }
 
+if ( $modal ) {
+	$toast = "M.toast({html: '$modal_text'})";
+} else {
+	$toast = "";
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -52,6 +59,20 @@ switch ( $logged_in ) {
 
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+
+    <!-- Import JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".button-collapse").sidenav();
+            $('.materialboxed').materialbox();
+            $('.tooltipped').tooltip();
+			<?= $toast?>
+        });
+
+    </script>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
