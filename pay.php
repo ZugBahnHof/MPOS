@@ -1,5 +1,5 @@
 <?php
-$site_title = "Verkauf";
+$site_title = "Bezahlung";
 include 'inc/header.inc.php';
 $user = check_user();
 if (!$_SESSION['cart']) {
@@ -41,7 +41,7 @@ function calculateChange(money_given) {
       });
   });
 </script>
-<h1 class="<?=$site_color_accent_text?>">Bzahlung</h1>
+<h1 class="<?=$site_color_accent_text?>">Bezahlung</h1>
 <p>Links sehen sie die Übersicht an gekauften Artikeln, rechts können sie kassieren.</p>
 <div class="row">
   <div class="col s12 m6">
