@@ -15,6 +15,7 @@ if ( isset( $_POST['email'] ) && isset( $_POST['passwort'] ) ) {
 	//Überprüfung des Passworts
 	if ( $user !== false && password_verify( $passwort, $user['passwort'] ) ) {
 		$_SESSION['userid'] = $user['id'];
+		$_SESSION['site'] = "mpos";
 
 		//Möchte der Nutzer angemeldet beleiben?
 		if ( isset( $_POST['angemeldet_bleiben'] ) ) {

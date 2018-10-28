@@ -43,6 +43,8 @@ function check_user_basic() {
 
 	if ( ! isset( $_SESSION['userid'] ) ) {
 		return false;
+	if ($_SESSION['site'] == "mpos") {
+		return false;
 	}
 
 
@@ -56,6 +58,8 @@ function check_user_basic() {
 function check_user() {
 	if ( check_user_basic() != false ) {
 		return check_user_basic();
+	} elseif ($_SESSION['site'] == "mpos") {
+		die( header( "Location: index.php?msg=Bitte+erst+anmelden!" ) );
 	} else {
 		die( header( "Location: index.php?msg=Bitte+erst+anmelden!" ) );
 	}
