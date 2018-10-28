@@ -16,7 +16,9 @@ $user = check_user();
         $.getJSON("shop_ajax.php?action=get_cart", function (data) {
             console.log(data);
             $("#cart tbody").empty();
+            var gpreis = 0;
             $.each(data, function (index, value) {
+                gpreis = gpreis + value.quantity * value.article.price;
                 $("#cart tbody").append("<tr>" +
                     "<td>" +
                     value.quantity +
@@ -35,6 +37,15 @@ $user = check_user();
                     "</td>" +
                     "</tr>")
             });
+            $("#cart tbody").append("<tr>" +
+              "<th colspan='4'>" +
+              "Gesamt:" +
+              "</th>" +
+              "<th>" +
+              gpreis + "€" +
+              "</th>" +
+              "</tr>")
+
         });
     }
 
@@ -91,9 +102,9 @@ $user = check_user();
             <!--<input value="Noch ein Artikel" onclick="clone_this(this)" type="button"
            class="btn <?php /*echo $site_color_accent; */ ?>">
 -->
-            <button class="btn waves-effect waves-light <?php echo $site_color; ?>" type="submit" name="action">
+            <button class="btn waves-effect waves-light <?=$site_color?> col s12" type="submit" name="action">
                 Hinzufügen
-                <i class="material-icons right">shopping_cart</i>
+                <i class="material-icons right">add_shopping_cart</i>
             </button>
         </form>
     </div>
