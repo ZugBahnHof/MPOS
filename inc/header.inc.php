@@ -75,6 +75,7 @@ if ( $modal ) {
             $('.materialboxed').materialbox();
             $('.tooltipped').tooltip();
 						$('select').formSelect();
+						$('.collapsible').collapsible();
 			<?= $toast?>
         });
 

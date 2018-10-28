@@ -76,14 +76,12 @@ $user = check_user();
 
 
 <h1 class="<?php echo $site_color_accent_text; ?>">Einstellungen</h1>
-
 <?php
 if ( isset( $success_msg ) && ! empty( $success_msg ) ):
 	?>
-    <div class="alert alert-success">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<?php echo $success_msg; ?>
-    </div>
+<script>
+		M.toast({html: '<i class="material-icons">check</i><?=$success_msg?>'});
+</script>
 <?php
 endif;
 ?>
@@ -91,112 +89,186 @@ endif;
 <?php
 if ( isset( $error_msg ) && ! empty( $error_msg ) ):
 	?>
-    <div class="alert alert-danger">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<?php echo $error_msg; ?>
-    </div>
+	<script>
+			M.toast({html: '<i class="material-icons">check</i><?=$error_msg?>'});
+	</script>
 <?php
 endif;
 ?>
-
 <div class="row">
-    <div class="col s12">
-        <ul class="tabs <?php echo $site_color . "-text"; ?>">
-            <li class="tab col s4"><a class="<?php echo $site_color . "-text"; ?> active" href="#data">Persönliche
-                    Daten</a></li>
-            <li class="tab col s4"><a class="<?php echo $site_color . "-text"; ?>" href="#email">E-Mail</a></li>
-            <li class="tab col s4"><a class="<?php echo $site_color . "-text"; ?>" href="#passwort">Passwort</a></li>
-            <div class="indicator <?php echo $site_color; ?>" style="z-index:1"></div>
-        </ul>
-    </div>
+	<div class="col s12 m4">
+		<h3>Persönliche Einstellungen</h3>
+		<p>Ändern Sie Ihren Namen, Ihr Passwort und Ihre E-Mail-Adresse</p>
+	</div>
+	<div class="col s12 m8">
+		<ul class="collapsible">
+    	<li>
+      	<div class="collapsible-header"><i class="material-icons">account_circle</i>Name</div>
+      	<div class="collapsible-body">
+					<form action="?save=personal_data" method="post" class="col s12">
+	            <p>Zum Änderen ihres Namens geben sie bitte den neuen, sowie ihre E-Mail-Adresse ein.</p>
 
-    <!-- Persönliche Daten-->
-    <div class="row" id="data">
-        <form action="?save=personal_data" method="post" class="col s12">
-            <h5>Zum Änderen deiner Persönlichen Daten gib bitte die neuen Daten, sowie deine E-Mail-Adresse ein.</h5>
+	            <div class="input-field col s12 m6">
+	                <input class="validate" id="inputVorname" name="vorname" type="text"
+	                       value="<?php echo htmlentities( $user['vorname'] ); ?>" required>
+	                <label for="inputVorname">Vorname</label>
+	            </div>
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputEmail" name="email" type="email"
-                       value="<?php echo htmlentities( $user['email'] ); ?>" required>
-                <label for="inputEmail">E-Mail</label>
-            </div>
+	            <div class="input-field col s12 m6">
+	                <input class="validate" id="inputNachname" name="nachname" type="text"
+	                       value="<?php echo htmlentities( $user['nachname'] ); ?>" required>
+	                <label for="inputNachname">Nachname</label>
+	            </div>
+							<div class="input-field col s12 m6">
+	                <input class="validate" id="inputEmail" name="email" type="email"
+	                       value="<?php echo htmlentities( $user['email'] ); ?>" required>
+	                <label for="inputEmail">E-Mail</label>
+	            </div>
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputVorname" name="vorname" type="text"
-                       value="<?php echo htmlentities( $user['vorname'] ); ?>" required>
-                <label for="inputVorname">Vorname</label>
-            </div>
+	            <button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 m6 btn-large">Speichern</button>
+	        </form>
+					&nbsp;
+				</div>
+    	</li>
+			<li>
+				<div class="collapsible-header"><i class="material-icons">email</i>E-Mail-Adresse</div>
+      	<div class="collapsible-body">
+					<form action="?save=email" method="post" class="col s12">
+	            <p>Zum Ändern Ihrer E-Mail-Adresse geben Sie bitte Ihr aktuelles Passwort sowie die neue E-Mail-Adresse
+	                ein.</p>
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputNachname" name="nachname" type="text"
-                       value="<?php echo htmlentities( $user['nachname'] ); ?>" required>
-                <label for="inputNachname">Nachname</label>
-            </div>
+	            <div class="input-field col s12">
+	                <input class="validate" id="inputPasswort" name="passwort" type="password" required>
+	                <label for="inputPasswort">Passwort</label>
+	            </div>
 
-            <div class=" col s12">
-                <button type="submit" class="<?php echo $site_color_accent; ?> btn btn-primary">Speichern</button>
-            </div>
-        </form>
-    </div>
+	            <div class="input-field col s12 m6">
+	                <input class="validate" id="inputEmail" name="email" type="email"
+	                       value="<?php echo htmlentities( $user['email'] ); ?>" required>
+	                <label for="inputEmail">E-Mail</label>
+	            </div>
 
-    <!-- Änderung der E-Mail-Adresse -->
-    <div class="row" id="email">
-        <form action="?save=email" method="post" class="col s12">
-            <h5>Zum Änderen deiner E-Mail-Adresse gib bitte dein aktuelles Passwort sowie die neue E-Mail-Adresse
-                ein.</h5>
+	            <div class="input-field col s12 m6">
+	                <input class="validate" id="inputEmail2" name="email2" type="email" required>
+	                <label for="inputEmail2">E-Mail (wiederholen)</label>
+	            </div>
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputPasswort" name="passwort" type="password" required>
-                <label for="inputPasswort">Passwort</label>
-            </div>
+	           <button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
+	        </form>
+					&nbsp;
+				</div>
+			</li>
+			<li>
+				<div class="collapsible-header"><i class="material-icons">security</i>Passwort</div>
+      	<div class="collapsible-body">
+					<form action="?save=passwort" method="post" class="col s12">
+	            <p>Zum Änderen Ihres Passworts geben Sie bitte Ihr aktuelles Passwort sowie das neue Passwort ein.</p>
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputEmail" name="email" type="email"
-                       value="<?php echo htmlentities( $user['email'] ); ?>" required>
-                <label for="inputEmail">E-Mail</label>
-            </div>
+	            <div class="input-field col s12">
+	                <input class="validate" id="inputPasswort" name="passwortAlt" type="password" required>
+	                <label for="inputPasswort">Altes Passwort</label>
+	            </div>
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputEmail2" name="email2" type="email" required>
-                <label for="inputEmail2">E-Mail (wiederholen)</label>
-            </div>
-
-            <div class=" col s12">
-                <button type="submit" class="<?php echo $site_color_accent; ?> btn btn-primary">Speichern</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Änderung des Passworts -->
-    <div class="row" id="passwort">
-        <form action="?save=passwort" method="post" class="col s12">
-            <h5>Zum Änderen deines Passworts gib bitte dein aktuelles Passwort sowie das neue Passwort ein.</h5>
-
-            <div class="input-field col s12">
-                <input class="validate" id="inputPasswort" name="passwortAlt" type="password" required>
-                <label for="inputPasswort">Altes Passwort</label>
-            </div>
-
-            <div class="input-field col s12">
-                <input class="validate" id="inputPasswortNeu" name="passwortNeu" type="password" required>
-                <label for="inputPasswortNeu">Neues Passwort</label>
-            </div>
+	            <div class="input-field col s12 m6">
+	                <input class="validate" id="inputPasswortNeu" name="passwortNeu" type="password" required>
+	                <label for="inputPasswortNeu">Neues Passwort</label>
+	            </div>
 
 
-            <div class="input-field col s12">
-                <input class="validate" id="inputPasswortNeu2" name="passwortNeu2" type="password" required>
-                <label for="inputPasswortNeu2">Neues Passwort (wiederholen)</label>
-            </div>
+	            <div class="input-field col s12 m6">
+	                <input class="validate" id="inputPasswortNeu2" name="passwortNeu2" type="password" required>
+	                <label for="inputPasswortNeu2">Neues Passwort (wiederholen)</label>
+	            </div>
 
-            <div class="form-group">
-                <div class="col s12">
-                    <button type="submit" class="<?php echo $site_color_accent; ?> btn btn-primary">Speichern</button>
-                </div>
-        </form>
-    </div>
-
+	            <button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
+	        </form>
+					&nbsp;
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
-
+<div class="row">
+	<div class="col s12 m4">
+		<h3>Einstellungen des Betriebes</h3>
+		<p>Ändern Sie Namen, Adresse und weiter Daten ihres Bertriebes</p>
+	</div>
+	<div class="col s12 m8">
+		<ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">store</i>Name des Betriebes</div>
+      <div class="collapsible-body">
+				<form action="?save=name_g" method="post" class="col s12">
+					<div class="input-field col s12">
+							<input class="validate" id="id" name="name_g" type="text" required>
+							<label for="id">Firmenname</label>
+					</div>
+					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
+				</form>
+				&nbsp;
+			</div>
+    </li>
+		<li>
+      <div class="collapsible-header"><i class="material-icons">location_on</i>Adresse</div>
+      <div class="collapsible-body">
+				<form action="?save=adress" method="post" class="col s12">
+					<div class="input-field col s10">
+							<input class="validate" id="id" name="" type="text" required>
+							<label for="id">Straße</label>
+					</div>
+					<div class="input-field col s2">
+							<input class="validate" id="id" name="" type="text" required>
+							<label for="id">Hausnummer</label>
+					</div>
+					<div class="input-field col s4">
+							<input class="validate" id="id" name="" type="text" required>
+							<label for="id">Postleitzahl</label>
+					</div>
+					<div class="input-field col s4">
+							<input class="validate" id="id" name="" type="text" required>
+							<label for="id">Stadt</label>
+					</div>
+					<div class="input-field col s4">
+							<input class="validate" id="id" name="" type="text" required>
+							<label for="id">Land</label>
+					</div>
+					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
+				</form>
+				&nbsp;
+			</div>
+    </li>
+		<li>
+      <div class="collapsible-header"><i class="material-icons">contact_mail</i>Kontakt</div>
+      <div class="collapsible-body">
+				<form action="?save=contact" method="post" class="col s12">
+					<div class="input-field col s12">
+							<input class="validate" id="id" name="" type="email" required>
+							<label for="id">E-Mail-Adresse</label>
+					</div>
+					<div class="input-field col s12">
+							<input class="validate" id="id" name="" type="tel" required>
+							<label for="id">Telefonnummer</label>
+					</div>
+					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
+				</form>
+				&nbsp;
+			</div>
+    </li>
+		<li>
+      <div class="collapsible-header"><i class="material-icons">image</i>Logo</div>
+      <div class="collapsible-body">
+				<form action="?save=logo" method="post" class="col s12">
+					<div class="input-field col s12">
+							<input class="validate" id="id" name="" type="text" required>
+							<label for="id"></label>
+					</div>
+					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
+				</form>
+				&nbsp;
+			</div>
+    </li>
+	</div>
+</div>
 <?php
 include( "inc/footer.inc.php" )
 ?>
