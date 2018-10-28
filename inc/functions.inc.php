@@ -43,6 +43,7 @@ function check_user_basic() {
 
 	if ( ! isset( $_SESSION['userid'] ) ) {
 		return false;
+	}
 	if ($_SESSION['site'] == "mpos") {
 		return false;
 	}
@@ -56,10 +57,8 @@ function check_user_basic() {
 }
 
 function check_user() {
-	if ( check_user_basic() != false ) {
+	if ( check_user_basic() != false && $_SESSION['site'] == "mpos" ) {
 		return check_user_basic();
-	} elseif ($_SESSION['site'] == "mpos") {
-		die( header( "Location: index.php?msg=Bitte+erst+anmelden!" ) );
 	} else {
 		die( header( "Location: index.php?msg=Bitte+erst+anmelden!" ) );
 	}
@@ -69,7 +68,11 @@ function check_user() {
  * Returns true when the user is checked in, else false
  */
 function is_checked_in() {
-	return isset( $_SESSION['userid'] );
+	if (isset($_SESSION['userid']) && $_SESSION['site'] == "mpos") {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /**
