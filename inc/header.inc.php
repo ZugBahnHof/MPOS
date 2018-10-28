@@ -74,6 +74,7 @@ if ( $modal ) {
             $(".button-collapse").sidenav();
             $('.materialboxed').materialbox();
             $('.tooltipped').tooltip();
+						$('select').formSelect();
 			<?= $toast?>
         });
 
