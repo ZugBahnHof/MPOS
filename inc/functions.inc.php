@@ -44,7 +44,7 @@ function check_user_basic() {
 	if ( ! isset( $_SESSION['userid'] ) ) {
 		return false;
 	}
-	if ($_SESSION['site'] == "mpos") {
+	if ($_SESSION['site'] != "mpos") {
 		return false;
 	}
 
