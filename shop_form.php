@@ -28,10 +28,10 @@ $user = check_user();
                     value.article.name +
                     "</td>" +
                     "<td>" +
-                    value.article.price +
+                    value.article.price + "€" +
                     "</td>" +
                     "<td>" +
-                    "NICHT BERECHNET" +
+                    value.quantity * value.article.price + "€" +
                     "</td>" +
                     "</tr>")
             });
