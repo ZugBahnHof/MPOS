@@ -126,8 +126,9 @@ $user = check_user();
                     Noch keine Artikel …
                 </td>
             </tr>
-            </tbody>
+          </tbody>
         </table>
+        <a class="waves-effect waves-light btn <?=$site_color_accent?> col s12" href="pay.php"><i class="material-icons right">shopping_cart</i>Bezahlen</a>
     </div>
 </div>
 
