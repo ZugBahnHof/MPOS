@@ -42,3 +42,19 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `quantity` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`), UNIQUE (`barcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+CREATE TABLE IF NOT EXISTS `company` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE latin1_german1_ci NOT NULL,
+  `street` varchar(255) COLLATE latin1_german1_ci NOT NULL,
+  `number` int(10) unsigned NOT NULL,
+  `postcode` int(10) unsigned NOT NULL,
+  `city` varchar(255) COLLATE latin1_german1_ci NOT NULL,
+  `state` varchar(255) COLLATE latin1_german1_ci NOT NULL,
+  `email` varchar(255) COLLATE latin1_german1_ci NOT NULL,
+  `tel` int(10) unsigned NOT NULL,
+  `logo` varchar(255) COLLATE latin1_german1_ci NOT NULL,
+  PRIMARY KEY (`id`), UNIQUE (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
+
+INSERT INTO `MPOS`.`company` (`id`, `name`, `street`, `number`, `postcode`, `city`, `state`, `email`, `tel`, `logo`) VALUES (NULL, 'Name', 'Straße', '0', '12345', 'Stadt', 'Deutschland', 'kontakt@firma.de', '1234567890', 'logo/logo.svg');

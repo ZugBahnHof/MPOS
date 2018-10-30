@@ -111,3 +111,16 @@ function error( $error_msg ) {
 	include( "templates/footer.inc.php" );
 	exit();
 }
+
+/**
+* Outputs the company data as an array
+*/
+function getCompany() {
+	global $pdo;
+	//$sql = "SELECT * FROM company";
+	//$company = $pdo->query($sql)->fetch();
+	$statement = $pdo->prepare( "SELECT * FROM company WHERE id = :id" );
+	$result    = $statement->execute( array( 'id' => 1 ) );
+	$company   = $statement->fetch();
+	return $company;
+}

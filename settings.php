@@ -6,72 +6,130 @@ require_once( "inc/functions.inc.php" );
 //Überprüfe, dass der User eingeloggt ist
 //Der Aufruf von check_user() muss in alle internen Seiten eingebaut sein
 $user = check_user();
-
-$site_description = "Einstellungen - ";
+$company = getCompany();
+$site_title = "Einstellungen";
 include "inc/header.inc.php";
 
 if ( isset( $_GET['save'] ) ) {
 	$save = $_GET['save'];
+	switch ($save) {
+		case 'personal_data':
+			$vorname  = trim( $_POST['vorname'] );
+			$nachname = trim( $_POST['nachname'] );
 
-	if ( $save == 'personal_data' ) {
-		$vorname  = trim( $_POST['vorname'] );
-		$nachname = trim( $_POST['nachname'] );
+			if ( $vorname == "" || $nachname == "" ) {
+				$error_msg = "Bitte Vor- und Nachname ausfüllen.";
+			} else {
+				$statement = $pdo->prepare( "UPDATE users SET vorname = :vorname, nachname = :nachname, updated_at=NOW() WHERE id = :userid" );
+				$result    = $statement->execute( array(
+					'vorname'  => $vorname,
+					'nachname' => $nachname,
+					'userid'   => $user['id']
+				));
+				$success_msg = "Daten erfolgreich gespeichert.";
+			}
+			break;
 
-		if ( $vorname == "" || $nachname == "" ) {
-			$error_msg = "Bitte Vor- und Nachname ausfüllen.";
-		} else {
-			$statement = $pdo->prepare( "UPDATE users SET vorname = :vorname, nachname = :nachname, updated_at=NOW() WHERE id = :userid" );
-			$result    = $statement->execute( array(
-				'vorname'  => $vorname,
-				'nachname' => $nachname,
-				'userid'   => $user['id']
-			) );
+		case 'email':
+			$passwort = $_POST['passwort'];
+			$email    = trim( $_POST['email'] );
+			$email2   = trim( $_POST['email2'] );
 
-			$success_msg = "Daten erfolgreich gespeichert.";
-		}
-	} else if ( $save == 'email' ) {
-		$passwort = $_POST['passwort'];
-		$email    = trim( $_POST['email'] );
-		$email2   = trim( $_POST['email2'] );
+			if ( $email != $email2 ) {
+				$error_msg = "Die eingegebenen E-Mail-Adressen stimmten nicht überein.";
+			} else if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+				$error_msg = "Bitte eine gültige E-Mail-Adresse eingeben.";
+			} else if ( ! password_verify( $passwort, $user['passwort'] ) ) {
+				$error_msg = "Bitte korrektes Passwort eingeben.";
+			} else {
+				$statement = $pdo->prepare( "UPDATE users SET email = :email WHERE id = :userid" );
+				$result    = $statement->execute( array( 'email' => $email, 'userid' => $user['id'] ) );
 
-		if ( $email != $email2 ) {
-			$error_msg = "Die eingegebenen E-Mail-Adressen stimmten nicht überein.";
-		} else if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
-			$error_msg = "Bitte eine gültige E-Mail-Adresse eingeben.";
-		} else if ( ! password_verify( $passwort, $user['passwort'] ) ) {
-			$error_msg = "Bitte korrektes Passwort eingeben.";
-		} else {
-			$statement = $pdo->prepare( "UPDATE users SET email = :email WHERE id = :userid" );
-			$result    = $statement->execute( array( 'email' => $email, 'userid' => $user['id'] ) );
+				$success_msg = "E-Mail-Adresse erfolgreich gespeichert.";
+			}
+			break;
 
-			$success_msg = "E-Mail-Adresse erfolgreich gespeichert.";
-		}
+		case 'passwort':
+			$passwortAlt  = $_POST['passwortAlt'];
+			$passwortNeu  = trim( $_POST['passwortNeu'] );
+			$passwortNeu2 = trim( $_POST['passwortNeu2'] );
 
-	} else if ( $save == 'passwort' ) {
-		$passwortAlt  = $_POST['passwortAlt'];
-		$passwortNeu  = trim( $_POST['passwortNeu'] );
-		$passwortNeu2 = trim( $_POST['passwortNeu2'] );
+			if ( $passwortNeu != $passwortNeu2 ) {
+				$error_msg = "Die eingegebenen Passwörter stimmten nicht überein.";
+			} else if ( $passwortNeu == "" ) {
+				$error_msg = "Das Passwort darf nicht leer sein.";
+			} else if ( ! password_verify( $passwortAlt, $user['passwort'] ) ) {
+				$error_msg = "Bitte korrektes Passwort eingeben.";
+			} else {
+				$passwort_hash = password_hash( $passwortNeu, PASSWORD_DEFAULT );
 
-		if ( $passwortNeu != $passwortNeu2 ) {
-			$error_msg = "Die eingegebenen Passwörter stimmten nicht überein.";
-		} else if ( $passwortNeu == "" ) {
-			$error_msg = "Das Passwort darf nicht leer sein.";
-		} else if ( ! password_verify( $passwortAlt, $user['passwort'] ) ) {
-			$error_msg = "Bitte korrektes Passwort eingeben.";
-		} else {
-			$passwort_hash = password_hash( $passwortNeu, PASSWORD_DEFAULT );
+				$statement = $pdo->prepare( "UPDATE users SET passwort = :passwort WHERE id = :userid" );
+				$result    = $statement->execute( array( 'passwort' => $passwort_hash, 'userid' => $user['id'] ) );
 
-			$statement = $pdo->prepare( "UPDATE users SET passwort = :passwort WHERE id = :userid" );
-			$result    = $statement->execute( array( 'passwort' => $passwort_hash, 'userid' => $user['id'] ) );
+				$success_msg = "Passwort erfolgreich gespeichert.";
+			}
+			break;
 
-			$success_msg = "Passwort erfolgreich gespeichert.";
-		}
+		case 'name_g':
+			$name_g = $_POST['name_g'];
+			if ($name_g) {
+				$statement = $pdo->prepare("UPDATE company SET name = :name_g");
+				$statement->execute(array('name_g' => $name_g));
 
+				$success_msg = "Firmennamen erfolgreich gespeichert.";
+			} else {
+				$error_msg = "Bitte geben sie einen Firmennamen an.";
+			}
+			break;
+
+		case 'adress':
+			$street 	= $_POST['street'];
+			$number 	= $_POST['number'];
+			$postcode = $_POST['postcode'];
+			$city 		= $_POST['city'];
+			$state 		= $_POST['state'];
+			if (! empty ( $street ) && ! empty ( $number) && ! empty ( $postcode) && ! empty ( $city) && ! empty ( $state ) ) {
+				$statement = $pdo->prepare("UPDATE company SET street = :street, number = :number, postcode = :postcode, city = :city, state = :state");
+				$statement->execute(array('street' => $street, 'number' => $number, 'postcode' => $postcode, 'city' => $city, 'state' => $state));
+
+				$success_msg = "Adresse erfolgreich gespeichert.";
+			} else {
+				$error_msg = "Bitte geben sie eine vollständige Adresse an.";
+			}
+			break;
+
+		case 'contact':
+			$email 		= $_POST['email'];
+			$tel 		= $_POST['tel'];
+			if (! empty ( $email ) && ! empty ( $tel) ) {
+				$statement = $pdo->prepare("UPDATE company SET email = :email, tel = :tel");
+				$statement->execute(array('email' => $email, 'tel' => $tel));
+
+				$success_msg = "Kontaktdaten erfolgreich gespeichert.";
+			} else {
+				$error_msg = "Bitte geben sie vollständige Daten an.";
+			}
+			break;
+
+		case 'logo':
+			$logo = $_POST['logo'];
+			if ($logo) {
+				$statement = $pdo->prepare("UPDATE company SET logo = :logo");
+				$statement->execute(array('logo' => $logo));
+
+				$success_msg = "Pfad zum Logo erfolgreich gespeichert.";
+			} else {
+				$error_msg = "Bitte geben sie einen gültigen Pfad an.";
+			}
+			break;
+		default:
+			// code...
+			break;
 	}
 }
 
 $user = check_user();
-
+$company = getCompany();
 ?>
 
 
@@ -80,7 +138,7 @@ $user = check_user();
 if ( isset( $success_msg ) && ! empty( $success_msg ) ):
 	?>
 <script>
-		M.toast({html: '<i class="material-icons">check</i><?=$success_msg?>'});
+		M.toast({html: '<i class="material-icons">check</i> <?=$success_msg?>'});
 </script>
 <?php
 endif;
@@ -90,7 +148,7 @@ endif;
 if ( isset( $error_msg ) && ! empty( $error_msg ) ):
 	?>
 	<script>
-			M.toast({html: '<i class="material-icons">check</i><?=$error_msg?>'});
+			M.toast({html: '<i class="material-icons">error_outline</i> <?=$error_msg?>'});
 	</script>
 <?php
 endif;
@@ -200,7 +258,7 @@ endif;
       <div class="collapsible-body">
 				<form action="?save=name_g" method="post" class="col s12">
 					<div class="input-field col s12">
-							<input class="validate" id="id" name="name_g" type="text" required>
+							<input class="validate" id="id" name="name_g" type="text" required value="<?=$company['name']?>">
 							<label for="id">Firmenname</label>
 					</div>
 					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
@@ -213,23 +271,23 @@ endif;
       <div class="collapsible-body">
 				<form action="?save=adress" method="post" class="col s12">
 					<div class="input-field col s10">
-							<input class="validate" id="id" name="" type="text" required>
+							<input class="validate" id="id" name="street" type="text" required value="<?=$company['street']?>">
 							<label for="id">Straße</label>
 					</div>
 					<div class="input-field col s2">
-							<input class="validate" id="id" name="" type="text" required>
+							<input class="validate" id="id" name="number" type="text" required value="<?=$company['number']?>">
 							<label for="id">Hausnummer</label>
 					</div>
 					<div class="input-field col s4">
-							<input class="validate" id="id" name="" type="text" required>
+							<input class="validate" id="id" name="postcode" type="text" required value="<?=$company['postcode']?>">
 							<label for="id">Postleitzahl</label>
 					</div>
 					<div class="input-field col s4">
-							<input class="validate" id="id" name="" type="text" required>
+							<input class="validate" id="id" name="city" type="text" required value="<?=$company['city']?>">
 							<label for="id">Stadt</label>
 					</div>
 					<div class="input-field col s4">
-							<input class="validate" id="id" name="" type="text" required>
+							<input class="validate" id="id" name="state" type="text" required value="<?=$company['state']?>">
 							<label for="id">Land</label>
 					</div>
 					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
@@ -242,11 +300,11 @@ endif;
       <div class="collapsible-body">
 				<form action="?save=contact" method="post" class="col s12">
 					<div class="input-field col s12">
-							<input class="validate" id="id" name="" type="email" required>
+							<input class="validate" id="id" name="email" type="email" required value="<?=$company['email']?>">
 							<label for="id">E-Mail-Adresse</label>
 					</div>
 					<div class="input-field col s12">
-							<input class="validate" id="id" name="" type="tel" required>
+							<input class="validate" id="id" name="tel" type="tel" required value="<?=$company['tel']?>">
 							<label for="id">Telefonnummer</label>
 					</div>
 					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
@@ -259,8 +317,8 @@ endif;
       <div class="collapsible-body">
 				<form action="?save=logo" method="post" class="col s12">
 					<div class="input-field col s12">
-							<input class="validate" id="id" name="" type="text" required>
-							<label for="id"></label>
+							<input class="validate" id="id" name="logo" type="text" required value="<?=$company['logo']?>">
+							<label for="id">Pfad zum Logo</label>
 					</div>
 					<button type="submit" class="<?=$site_color_accent?> btn btn-primary col s12 btn-large">Speichern</button>
 				</form>
