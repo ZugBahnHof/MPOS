@@ -107,7 +107,7 @@ if ( $modal ) {
                     </li>
                     <li>
                         <a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Kontostand"
-                           href="#!">
+                           href="money.php">
                             <i class="material-icons">attach_money</i>
                         </a>
                     </li>

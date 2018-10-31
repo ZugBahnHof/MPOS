@@ -7,3 +7,6 @@ body {
   main {
     flex: 1 0 auto;
   }
+.card_padding {
+  padding: 5%;
+}

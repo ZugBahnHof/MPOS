@@ -39,6 +39,25 @@ function calculateChange(money_given) {
           $('#bill').hide();
         }
       });
+      $('#pay_form').submit(function(e) {
+        e.preventDefault();
+        url = "money_ajax.php?action=add_money&money=" + <?=$_SESSION['gpreis']?> + "&user=" + "<?=$_SESSION['userid']?>";
+        $.getJSON(url, function (data) {
+            console.log("[ACTION RESULT OF add_money]");
+            console.log(data);
+            if (data.success || data.error) {
+                var html = "";
+                if (data.success) {
+                    html += '<i class="material-icons left">check</i>';
+                } else if (data.error) {
+                    html += '<i class="material-icons left">error</i>';
+                }
+                html += data.message;
+                M.toast({html: html});
+                window.location.replace("print_bill.php?type=" + $("#payment option:selected").text());
+            }
+          });
+      });
   });
 </script>
 <h1 class="<?=$site_color_accent_text?>">Bezahlung</h1>
@@ -90,9 +109,9 @@ function calculateChange(money_given) {
     </table>
   </div>
   <div class="col s12 m6">
-    <form method="post" action="print_bill.php">
+    <form method="post" action="print_bill.php" id="pay_form">
       <div class="input-field col s12">
-        <select name="payment" id="payment">
+        <select name="payment" id="payment" required>
           <option value="" disabled selected>Zahlungsmethode auswählen</option>
           <option value="cash" data-icon="icons/payment_options/money.svg" class="left">Bargeld</option>
           <option value="credit" data-icon="icons/payment_options/credit_card.svg" class="left">Kartenzahlung</option>

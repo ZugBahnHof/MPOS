@@ -26,8 +26,8 @@ CREATE TABLE `securitytokens` (
 
 CREATE TABLE `money` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `change` int(10) NOT NULL,
-  `sum` int(10) NOT NULL,
+  `change_price` double NOT NULL,
+  `balance` double NOT NULL,
   `updated_by` int(10) unsigned NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
