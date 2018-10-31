@@ -32,7 +32,8 @@ if ( isset( $_POST['email'] ) && isset( $_POST['passwort'] ) ) {
 			setcookie( "securitytoken", $securitytoken, time() + ( 3600 * 24 * 365 ) ); //Valid for 1 year
 		}
 
-		header( "Location: index.php?msg=Der+Login+war+erfolgreich" );
+		$_SESSION['msg'] = "Der Login war erfolgreich";
+		header( "Location: index.php" );
 		exit;
 	} else {
 		$error_msg = "E-Mail oder Passwort war ungültig";

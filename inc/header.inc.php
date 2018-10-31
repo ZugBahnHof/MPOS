@@ -6,9 +6,10 @@ $site_color             = "amber";
 $site_color_accent      = "red accent-4";
 $site_color_text        = "amber-text";
 $site_color_accent_text = "red-text text-accent-4";
-if ( isset( $_GET['msg'] ) ) {
+if ( isset( $_SESSION['msg'] ) ) {
 	$modal      = true;
-	$modal_text = $_GET['msg'];
+	$modal_text = $_SESSION['msg'];
+	unset( $_SESSION['msg']);
 } else {
 	$modal = false;
 }
