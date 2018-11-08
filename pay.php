@@ -1,4 +1,5 @@
 <?php
+session_start();
 $site_title = "Bezahlung";
 include 'inc/header.inc.php';
 $user = check_user();
