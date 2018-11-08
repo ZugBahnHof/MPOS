@@ -3,6 +3,25 @@ $site_title = "Produkte";
 include 'inc/header.inc.php';
 $user = check_user();
 
+if (isset($_POST["barcode"])) {
+  if (!empty($_POST['barcode'])) {
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $barcode = $_POST['barcode'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+
+    global $pdo;
+    $statement = $pdo->prepare( "INSERT INTO `articles` (`id`, `name`, `description`, `barcode`, `price`, `quantity`) VALUES (NULL, :name, :description, :barcode, :price, :quantity);" );
+		$result    = $statement->execute( array(
+			'name'    => $name,
+			'description' => $description,
+			'barcode'  => $barcode,
+			'price'  => $price,
+			'quantity'  => $quantity
+    ));
+  }
+}
 ?>
 <div class="row">
   <div class="col s9">
@@ -39,6 +58,45 @@ foreach ($pdo->query($sql) as $row) {
     </div>
   </div>
 </div>
+<div id="add-article" class="modal ">
+    <div class="modal-content">
+      <h4>Artikel hinzufügen</h4>
+      <p>Füllen Sie alle Felder aus!</p>
+      <div class="row">
+        <form class="col s12" id="add-article" action="articles.php" method="post">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="name" name="name" type="text" class="validate" required>
+              <label for="name">Name des Artikels</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="description" name="description" type="text" class="validate" required>
+              <label for="description">Ausführung des Artikels</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="price" type="text" name="price" class="validate" required>
+              <label for="price">Preis des Artikels</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="quantity" name="quantity" type="text" class="validate" required>
+              <label for="quantity">Anzahl des Artikels</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="barcode" name="barcode" type="text" class="validate" required>
+              <label for="barcode">Barcode des Artikels</label>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <br>
+          <button type="submit" class="waves-effect waves-light green btn-flat col s12">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 <?php
 include 'inc/footer.inc.php';
  ?>

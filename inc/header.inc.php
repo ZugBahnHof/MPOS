@@ -77,6 +77,7 @@ if ( $modal ) {
             $('.tooltipped').tooltip();
 						$('select').formSelect();
 						$('.collapsible').collapsible();
+						$('.modal').modal();
 			<?= $toast?>
         });
 
@@ -101,7 +102,7 @@ if ( $modal ) {
                         </a>
                     </li>
                     <li>
-                        <a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Artikel" href="#!">
+                        <a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Artikel" href="articles.php">
                             <i class="material-icons">widgets</i>
                         </a>
                     </li>

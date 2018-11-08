@@ -10,3 +10,27 @@ body {
 .card_padding {
   padding: 5%;
 }
+.article{
+  align-self: stretch;
+}
+.article-row {
+  display: flex; /* or inline-flex */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+  padding-right: 1%;
+}
+.btn-pad{
+  align-self: stretch;
+}
+.article-row {
+  display: flex; /* or inline-flex */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+}
+.card-row{
+  margin-bottom: 0 !important;
+}
