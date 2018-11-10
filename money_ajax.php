@@ -104,6 +104,35 @@ switch ( $action ) {
 		) );
     give_success("Betrag hinzugefügt");
     break;
+
+	case 'delete_money':
+    $money_to_add = $_GET['money'];
+    $userid = $_GET['user'];
+    if (empty($money_to_add)) {
+      give_error("Keine Differenz angegeben");
+    }
+    if (empty($userid)) {
+      give_error("Keinen Nutzer angegeben");
+    }
+
+    $money_to_substract = floatval($money_to_add);
+
+    global $pdo;
+    $sql = "SELECT `balance` FROM `money` ORDER BY `id` DESC LIMIT 1";
+    $curr_balance = $pdo->query($sql)->fetch();
+
+    $curr_balance = floatval($curr_balance['balance']);
+    //give_error(var_dump($curr_balance));
+    $new_balance = $curr_balance - $money_to_substract;
+
+    $statement = $pdo->prepare( "INSERT INTO `money` (`id`, `change_price`, `balance`, `updated_by`, `created_at`) VALUES (NULL, :money, :new_balance, :user, CURRENT_TIMESTAMP);" );
+		$result    = $statement->execute( array(
+			'money'    => $money_to_substract,
+			'new_balance' => $new_balance,
+			'user'  => $userid
+		) );
+    give_success("Betrag hinzugefügt");
+    break;
   default:
     //code...
     break;
