@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `barcode` int(10) unsigned NOT NULL,
   `price` double NOT NULL,
   `quantity` int(10) unsigned DEFAULT NULL,
+  `color` VARCHAR( 7 ) NOT NULL,
   PRIMARY KEY (`id`), UNIQUE (`barcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 

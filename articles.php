@@ -10,15 +10,17 @@ if (isset($_POST["barcode"])) {
     $barcode = $_POST['barcode'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
+    $article_color = $_POST['color'];
 
     global $pdo;
-    $statement = $pdo->prepare( "INSERT INTO `articles` (`id`, `name`, `description`, `barcode`, `price`, `quantity`) VALUES (NULL, :name, :description, :barcode, :price, :quantity);" );
+    $statement = $pdo->prepare( "INSERT INTO `articles` (`id`, `name`, `description`, `barcode`, `price`, `quantity`, `color`) VALUES (NULL, :name, :description, :barcode, :price, :quantity, :color);" );
 		$result    = $statement->execute( array(
 			'name'    => $name,
 			'description' => $description,
 			'barcode'  => $barcode,
 			'price'  => $price,
-			'quantity'  => $quantity
+			'quantity'  => $quantity,
+      'color' => $article_color
     ));
   }
 }
@@ -31,7 +33,7 @@ $sql = "SELECT * FROM articles";
 foreach ($pdo->query($sql) as $row) {
   echo '
     <div class="">
-      <div class="card-panel red accent-1 article">
+      <div class="card-panel article" style="background-color: '.$row['color'].'!important;">
         <h6 class="white-text">Artikel '.$row['id'].': <i>'.$row['name'].'</i></h6>
         <span class="white-text">Ausführung: '.$row['description'].'</span>
         <br>
@@ -88,6 +90,12 @@ foreach ($pdo->query($sql) as $row) {
             <div class="input-field col s12">
               <input id="barcode" name="barcode" type="text" class="validate" required>
               <label for="barcode">Barcode des Artikels</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-fiel col s12 m3">
+              <label for="color-picker">Farbe auswählen:</label>
+	            <input type="color" value="#ff8a80" id="color-picker" name="color">
             </div>
           </div>
           <div class="divider"></div>
