@@ -141,8 +141,8 @@ $(document).ready(function () {
           <span class="grey-text">Geld auszahlen</span>
         </a>
         <a href="#!" class="collection-item">
-          <i class="material-icons green-text">receipt</i>
-          <span class="grey-text">Barcode erzeugen</span>
+          <i class="material-icons green-text">print</i>
+          <span class="grey-text">Liste drucken</span>
         </a>
     </div>
   </div>
