@@ -55,8 +55,14 @@ foreach ($pdo->query($sql) as $row) {
   </div>
   <div class="col s3">
     <div class="collection">
-        <a href="#add-article" class="collection-item modal-trigger"><i class="material-icons">add</i>Artikel hinzufügen</a>
-        <a href="#!" class="collection-item"><i class="material-icons">receipt</i>Barcode erzeugen</a>
+      <a href="#add-article" class="collection-item modal-trigger">
+        <i class="material-icons green-text">add</i>
+        <span class="grey-text">Artikel hinzufügen</span>
+      </a>
+      <a href="#!" class="collection-item">
+        <i class="material-icons blue-text">receipt</i>
+        <span class="grey-text">Barcode erzeugen</span>
+      </a>
     </div>
   </div>
 </div>
